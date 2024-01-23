@@ -80,7 +80,8 @@ INSERT INTO users (username, password, profile_picture, last_login_time, is_dele
 
 -- change primary key
 ALTER TABLE users
-MODIFY id BIGINT NOT NULL,
+MODIFY id INT NOT NULL,
 DROP PRIMARY KEY,
 ADD CONSTRAINT pk_users PRIMARY KEY (id, username);
 
+-- 
