@@ -265,3 +265,42 @@ VALUES
 (4, 4, 4, 'Like New', 0.95, 15000, 15300, 300, '2022-04-15', '2022-04-20', 5, 45.99, 0.08, 'Completed', 'Long-time customer, VIP treatment.'),
 (5, 5, 5, 'Good', 0.85, 20000, 20600, 600, '2022-05-05', '2022-05-10', 5, 40.99, 0.18, 'Completed', 'Customer rented a luxury car for a special occasion.');
 
+-- basic insert
+CREATE DATABASE soft_uni;
+ 
+CREATE TABLE towns (
+id INT NOT NULL AUTO_INCREMENT,
+name VARCHAR(50) NOT NULL,
+PRIMARY KEY (id)
+);
+
+
+ 
+ CREATE TABLE addresses (
+id INT NOT NULL AUTO_INCREMENT,
+address_text VARCHAR(50) NOT NULL,
+town_id INT NOT NULL,
+PRIMARY KEY (id)
+);
+
+
+
+CREATE TABLE departments (
+id INT NOT NULL AUTO_INCREMENT,
+name VARCHAR(50) NOT NULL,
+PRIMARY KEY (id)
+);
+
+
+CREATE TABLE employees (
+id INT NOT NULL AUTO_INCREMENT,
+first_name VARCHAR(50) NOT NULL,
+middle_name VARCHAR(50),
+last_name VARCHAR(50) NOT NULL,
+job_title VARCHAR(50) NOT NULL, 
+department_id INT NOT NULL,
+hire_date DATE,
+salary DOUBLE,
+address_id INT NOT NULL,
+PRIMARY KEY (id)
+);
