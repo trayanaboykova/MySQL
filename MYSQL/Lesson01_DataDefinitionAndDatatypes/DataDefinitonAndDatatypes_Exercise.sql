@@ -328,3 +328,9 @@ SELECT * FROM towns;
 SELECT * FROM departments;
 SELECT * FROM employees;
 
+-- basic select all fields and order them
+SELECT * FROM towns ORDER BY name ASC;
+
+SELECT * FROM departments ORDER BY name ASC;
+
+SELECT * FROM employees ORDER BY salary DESC;
