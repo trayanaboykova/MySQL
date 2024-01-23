@@ -93,3 +93,175 @@ ALTER TABLE users
 DROP PRIMARY KEY,
 ADD CONSTRAINT pk_users PRIMARY KEY users (id),
 MODIFY COLUMN username Varchar(30) unique;
+
+-- movie database
+CREATE DATABASE movies;
+
+CREATE TABLE directors (
+id INT NOT NULL AUTO_INCREMENT,
+director_name VARCHAR(50) NOT NULL,
+notes TEXT,
+PRIMARY KEY (id)
+);
+
+INSERT INTO directors (director_name, notes) VALUES
+('Director1', 'Note 1'),
+('Director2', 'Note 2'),
+('Director3', 'Note 3'),
+('Director4', 'Note 4'),
+('Director5', 'Note 5');
+
+CREATE TABLE genres (
+id INT NOT NULL AUTO_INCREMENT,
+genre_name VARCHAR(50) NOT NULL,
+notes TEXT,
+PRIMARY KEY (id)
+);
+
+INSERT INTO genres (genre_name, notes) VALUES
+('Genre1', 'Note 1'),
+('Genre2', 'Note 2'),
+('Genre3', 'Note 3'),
+('Genre4', 'Note 4'),
+('Genre5', 'Note 5');
+
+CREATE TABLE categories (
+id INT NOT NULL AUTO_INCREMENT,
+category_name VARCHAR(50) NOT NULL,
+notes TEXT,
+PRIMARY KEY (id)
+);
+
+INSERT INTO categories (category_name, notes) VALUES
+('Category1', 'Note 1'),
+('Category2', 'Note 2'),
+('Category3', 'Note 3'),
+('Category4', 'Note 4'),
+('Category5', 'Note 5');
+
+CREATE TABLE movies (
+id INT NOT NULL AUTO_INCREMENT,
+title VARCHAR(50) NOT NULL,
+director_ID INT,
+copyright_year YEAR,
+length TIME,
+genre_id INT,
+category_id INT,
+rating DOUBLE,
+notes TEXT,
+PRIMARY KEY (id)
+);
+
+INSERT INTO movies (title, director_id, copyright_year, length, genre_id, category_id, rating, notes) VALUES
+('Movie1', 1, 2000, 120, 1, 1, 7.5, 'Note 1'),
+('Movie2', 2, 2005, 140, 2, 2, 8.0, 'Note 2'),
+('Movie3', 3, 2010, 110, 3, 3, 6.5, 'Note 3'),
+('Movie4', 4, 2015, 140, 4, 4, 9.0, 'Note 4'),
+('Movie5', 5, 2020, 130, 5, 5, 7.8, 'Note 5');
+
+-- car rental database
+CREATE DATABASE car_rental;
+
+CREATE TABLE categories (
+id INT NOT NULL AUTO_INCREMENT,
+category VARCHAR(50) NOT NULL,
+daily_rate DOUBLE,
+weekly_rate DOUBLE,
+monthly_rate DOUBLE,
+weekend_rate DOUBLE,
+PRIMARY KEY (id)
+);
+
+INSERT INTO categories (category, daily_rate, weekly_rate, monthly_rate, weekend_rate) VALUES
+('Compact', 25.99, 149.99, 499.99, 39.99),
+('Sedan', 29.99, 169.99, 549.99, 44.99),
+('SUV', 34.99, 199.99, 649.99, 49.99),
+('Luxury', 49.99, 299.99, 999.99, 69.99),
+('Van', 39.99, 229.99, 749.99, 59.99);
+
+CREATE TABLE cars (
+id INT NOT NULL AUTO_INCREMENT,
+plate_number VARCHAR(10) NOT NULL,
+make VARCHAR(20) NOT NULL,
+model VARCHAR(20) NOT NULL,
+car_year YEAR,
+category_id INT,
+doors INT,
+picture	 BLOB, 
+car_condition VARCHAR(20),
+available BOOLEAN, 
+PRIMARY KEY (id)
+);
+
+INSERT INTO cars (plate_number, make, model, car_year, category_id, doors, picture, car_condition, available)
+VALUES
+('ABC123', 'Toyota', 'Corolla', 2020, 1, 4, NULL, 'Excellent', TRUE),
+('XYZ456', 'Honda', 'Civic', 2018, 2, 4, NULL, 'Good', TRUE),
+('DEF789', 'Ford', 'Escape', 2019, 3, 4, NULL, 'Very Good', FALSE),
+('GHI987', 'Chevrolet', 'Tahoe', 2021, 4, 4, NULL, 'Like New', TRUE),
+('JKL654', 'BMW', 'X5', 2022, 5, 4, NULL, 'New', FALSE);
+
+CREATE TABLE employees (
+id INT NOT NULL AUTO_INCREMENT,
+first_name VARCHAR(50) NOT NULL,
+last_name VARCHAR(50) NOT NULL,
+title VARCHAR(30) NOT NULL,
+notes TEXT,
+PRIMARY KEY (id)
+);
+
+INSERT INTO employees (first_name, last_name, title, notes)
+VALUES
+('John', 'Doe', 'Manager', 'Excellent employee with strong leadership skills.'),
+('Jane', 'Smith', 'Developer', 'Experienced software developer with expertise in Java.'),
+('Bob', 'Johnson', 'Analyst', 'Detail-oriented data analyst with strong analytical skills.'),
+('Alice', 'Williams', 'Designer', 'Creative graphic designer with a keen eye for aesthetics.'),
+('Charlie', 'Brown', 'Assistant', 'Hardworking assistant providing valuable support to the team.');
+
+CREATE TABLE customers (
+id INT NOT NULL AUTO_INCREMENT,
+driver_licence_number VARCHAR(20) NOT NULL,
+full_name VARCHAR(50) NOT NULL,
+address VARCHAR(100) NOT NULL,
+city VARCHAR(50) NOT NULL,
+zip_code VARCHAR(20) NOT NULL,
+notes TEXT,
+PRIMARY KEY (id)
+);
+
+INSERT INTO customers (driver_licence_number, full_name, address, city, zip_code, notes)
+VALUES
+('DL123456', 'Alice Johnson', '123 Main St', 'Cityville', '12345', 'Regular customer, preferred contact via email.'),
+('DL789012', 'Bob Smith', '456 Oak Ave', 'Townsville', '56789', 'Frequent renter, prefers phone contact.'),
+('DL345678', 'Charlie Brown', '789 Pine Ln', 'Villagetown', '98765', 'New customer, special request for a specific car model.'),
+('DL901234', 'David Davis', '101 Elm St', 'Hamletsville', '54321', 'Long-time customer, usually rents on weekends.'),
+('DL567890', 'Eva Evans', '202 Cedar Rd', 'Cityburg', '13579', 'VIP customer, requests luxury cars for special occasions.');
+ 
+ CREATE TABLE rental_orders (
+id INT NOT NULL AUTO_INCREMENT,
+employee_id INT NOT NULL,
+customer_id INT NOT NULL,
+car_id INT NOT NULL,
+car_condition VARCHAR(20),
+tank_level DOUBLE,
+kilometrage_start DOUBLE,
+kilometrage_end DOUBLE,
+total_kilometrage DOUBLE,
+start_date DATE,
+end_date DATE,
+total_days INT,
+rate_applied DOUBLE,
+tax_rate DOUBLE,
+order_status VARCHAR(20),
+notes TEXT,
+PRIMARY KEY (id)
+);
+
+INSERT INTO rental_orders (employee_id, customer_id, car_id, car_condition, tank_level, kilometrage_start, kilometrage_end, total_kilometrage, start_date, end_date, total_days, rate_applied, tax_rate, order_status, notes)
+VALUES
+(1, 1, 1, 'Good', 0.75, 10000, 10500, 500, '2022-01-01', '2022-01-05', 5, 35.99, 0.1, 'Completed', 'Customer was satisfied with the service.'),
+(2, 2, 2, 'Excellent', 0.90, 8000, 8100, 100, '2022-02-10', '2022-02-15', 5, 42.99, 0.12, 'Completed', 'Regular customer with a discount applied.'),
+(3, 3, 3, 'Very Good', 0.80, 12000, 12500, 500, '2022-03-20', '2022-03-25', 5, 38.99, 0.15, 'Completed', 'Special request for a specific car model.'),
+(4, 4, 4, 'Like New', 0.95, 15000, 15300, 300, '2022-04-15', '2022-04-20', 5, 45.99, 0.08, 'Completed', 'Long-time customer, VIP treatment.'),
+(5, 5, 5, 'Good', 0.85, 20000, 20600, 600, '2022-05-05', '2022-05-10', 5, 40.99, 0.18, 'Completed', 'Customer rented a luxury car for a special occasion.');
+
