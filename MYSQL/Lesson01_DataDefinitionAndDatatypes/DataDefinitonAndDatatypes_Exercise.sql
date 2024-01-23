@@ -34,7 +34,10 @@ INSERT INTO minions (id, name, age, town_id) VALUES
 (3, 'Steward', NULL, 2);
 
 -- truncate table minions
+USE minions;
 TRUNCATE TABLE minions;
+
+
 
 
 
