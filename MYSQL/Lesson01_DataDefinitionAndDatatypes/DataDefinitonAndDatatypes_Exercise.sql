@@ -88,3 +88,8 @@ ADD CONSTRAINT pk_users PRIMARY KEY (id, username);
 ALTER TABLE users
 MODIFY COLUMN last_login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
+-- set unique field
+ALTER TABLE users
+DROP PRIMARY KEY,
+ADD CONSTRAINT pk_users PRIMARY KEY users (id),
+MODIFY COLUMN username Varchar(30) unique;
