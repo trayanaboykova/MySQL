@@ -21,3 +21,17 @@ ALTER TABLE minions
 ADD CONSTRAINT fk_town
 FOREIGN KEY (town_id)
 REFERENCES towns(id);
+
+-- insert records in both tables
+INSERT INTO towns (name) VALUES
+('Sofia'),
+('Plovdiv'),
+('Varna');
+
+INSERT INTO minions (name, age, town_id) VALUES
+('Kevin', 22, 1),
+('Bob', 15, 3),
+('Steward', NULL, 2);
+
+
+
