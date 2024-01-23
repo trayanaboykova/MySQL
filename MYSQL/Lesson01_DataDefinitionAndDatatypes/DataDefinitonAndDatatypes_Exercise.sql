@@ -334,3 +334,11 @@ SELECT * FROM towns ORDER BY name ASC;
 SELECT * FROM departments ORDER BY name ASC;
 
 SELECT * FROM employees ORDER BY salary DESC;
+
+-- basic select some fields
+SELECT name FROM towns ORDER BY name;
+
+SELECT name FROM departments ORDER BY name;
+
+SELECT first_name, last_name, job_title, salary FROM employees ORDER BY salary DESC;
+
