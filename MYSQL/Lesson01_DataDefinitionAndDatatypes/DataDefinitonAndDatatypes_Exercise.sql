@@ -37,7 +37,8 @@ INSERT INTO minions (id, name, age, town_id) VALUES
 USE minions;
 TRUNCATE TABLE minions;
 
-
-
+-- drop all tables
+USE minions;
+DROP table minions, towns;
 
 
