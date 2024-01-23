@@ -60,7 +60,22 @@ INSERT INTO people (name, picture, height, weight, gender, birthdate, biography)
 ('Alice Brown', NULL, 1.68, 60.8, 'f', '1995-11-03', 'A short biography of Alice Brown.'),
 ('Charlie Wilson', NULL, 1.88, 78.3, 'm', '1988-09-18', 'A short biography of Charlie Wilson.');
 
+-- create table users
+CREATE TABLE users (
+id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+username VARCHAR(30) unique,
+password VARCHAR(26),
+profile_picture BLOB,
+last_login_time TIME,
+is_deleted BOOLEAN
+);
 
+INSERT INTO users (username, password, profile_picture, last_login_time, is_deleted) VALUES
+('Margo', 'password1', NULL, NULL, true),
+('Anna', 'password2', NULL, NULL, true),
+('Dorothea', 'password3', NULL, NULL, false),
+('Augustine', 'password4', NULL, NULL, true),
+('Betty', 'password5', NULL, NULL, false);
 
 
 
