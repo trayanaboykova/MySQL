@@ -84,4 +84,7 @@ MODIFY id INT NOT NULL,
 DROP PRIMARY KEY,
 ADD CONSTRAINT pk_users PRIMARY KEY (id, username);
 
--- 
+-- set default value of a field
+ALTER TABLE users
+MODIFY COLUMN last_login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
