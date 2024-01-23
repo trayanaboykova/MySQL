@@ -342,3 +342,10 @@ SELECT name FROM departments ORDER BY name;
 
 SELECT first_name, last_name, job_title, salary FROM employees ORDER BY salary DESC;
 
+-- increase employees salary
+UPDATE employees 
+SET salary = salary * 1.1;
+
+SELECT salary FROM employees;
+
+SET SQL_SAFE_UPDATES = 0;
