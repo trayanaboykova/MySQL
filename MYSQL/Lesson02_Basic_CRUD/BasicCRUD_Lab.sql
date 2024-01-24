@@ -17,7 +17,21 @@ ORDER BY id;
 UPDATE employees 
 SET salary = salary + 100
 WHERE job_title = 'Manager';
-SELECT * FROM employees;
+SELECT salary FROM employees;
+
+-- TOP PAID EMPLOYEE
+CREATE VIEW top_paid_employee AS
+SELECT *
+FROM employees
+ORDER BY salary DESC
+LIMIT 1;
+SELECT * FROM top_paid_employee;
+
+-- SELECT EMPLOYEES BY MULTIPLE FILTERS
+SELECT *
+FROM employees
+WHERE department_id = 4 AND salary >= 1000
+ORDER BY id;
 
 
 
