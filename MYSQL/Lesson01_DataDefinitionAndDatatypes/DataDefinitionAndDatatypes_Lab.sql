@@ -1,43 +1,43 @@
--- create new database
+-- CREATE NEW DATABASE
 CREATE DATABASE gamebar;
 
--- create table employees
+-- CREATE TABLE EMPLOYEES
 CREATE TABLE employees (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50),
     last_name VARCHAR(50)
 );
 
--- create table categories
+-- CREATE TABLE CATEGORIES
 CREATE TABLE categories (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
 
--- create table products
+-- CREATE TABLE PRODUCTS
 CREATE TABLE products (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     category_id INT NOT NULL
 );
 
--- insert data in tables
+-- INSERT DATA IN TABLES
 INSERT INTO employees (first_name, last_name)
 VALUES 
 ("Field", "List"),
 ("Second", "Entry"),
 ("Third", "Employee");
 
--- alter tables
+-- ALTER TABLES
 ALTER TABLE employees
 ADD COLUMN middle_name VARCHAR(50) NOT NULL;
 
--- adding constraints
+-- ADDING CONSTRAINTS
 ALTER TABLE products
 ADD CONSTRAINT fk_category
 FOREIGN KEY (category_id)
 REFERENCES categories(id);
 
--- modifying columns
+-- MODIFYING COLUMNS
 ALTER TABLE employees
 MODIFY COLUMN middle_name VARCHAR(100);
