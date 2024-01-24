@@ -33,5 +33,11 @@ FROM employees
 WHERE department_id = 4 AND salary >= 1000
 ORDER BY id;
 
+-- DELETE FROM TABLE
+DELETE FROM employees
+WHERE department_id IN (1, 2);
+SELECT *
+FROM employees
+ORDER BY id;
 
 
