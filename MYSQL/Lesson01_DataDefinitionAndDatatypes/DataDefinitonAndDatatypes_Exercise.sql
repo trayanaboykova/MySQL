@@ -1,7 +1,7 @@
--- create database
+-- CREATE DATABASE
 CREATE DATABASE minions;
 
--- create tables
+-- CREATE TABLES
 CREATE TABLE minions (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE towns (
   name VARCHAR(50) NOT NULL
 );
 
--- alter minions table
+-- ALTER MINIONS TABLE
 ALTER TABLE minions
 ADD COLUMN town_id INT;
 
@@ -22,7 +22,7 @@ ADD CONSTRAINT fk_town
 FOREIGN KEY (town_id)
 REFERENCES towns(id);
 
--- insert records in both tables
+-- INSERT RECORDS IN BOTH TABLES
 INSERT INTO towns (id, name) VALUES
 (1, 'Sofia'),
 (2, 'Plovdiv'),
@@ -33,15 +33,15 @@ INSERT INTO minions (id, name, age, town_id) VALUES
 (2, 'Bob', 15, 3),
 (3, 'Steward', NULL, 2);
 
--- truncate table minions
+-- TRUNCATE TABLE MINIONS
 USE minions;
 TRUNCATE TABLE minions;
 
--- drop all tables
+-- DROP ALL TABLES
 USE minions;
 DROP table minions, towns;
 
--- create table people
+-- CREATE TABLE PEOPLE
 CREATE TABLE people (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(200) NOT NULL,
@@ -60,7 +60,7 @@ INSERT INTO people (name, picture, height, weight, gender, birthdate, biography)
 ('Alice Brown', NULL, 1.68, 60.8, 'f', '1995-11-03', 'A short biography of Alice Brown.'),
 ('Charlie Wilson', NULL, 1.88, 78.3, 'm', '1988-09-18', 'A short biography of Charlie Wilson.');
 
--- create table users
+-- CREATE TABLE USERS
 CREATE TABLE users (
 id INT NOT NULL AUTO_INCREMENT,
 username VARCHAR(30) unique,
@@ -78,23 +78,23 @@ INSERT INTO users (username, password, profile_picture, last_login_time, is_dele
 ('Augustine', 'password4', NULL, NULL, true),
 ('Betty', 'password5', NULL, NULL, false);
 
--- change primary key
+-- CHANGE PRIMARY KEY
 ALTER TABLE users
 MODIFY id INT NOT NULL,
 DROP PRIMARY KEY,
 ADD CONSTRAINT pk_users PRIMARY KEY (id, username);
 
--- set default value of a field
+-- SET DEFAULT VALUE OF A FIELD
 ALTER TABLE users
 MODIFY COLUMN last_login_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
--- set unique field
+-- SET UNIQUE FIELD
 ALTER TABLE users
 DROP PRIMARY KEY,
 ADD CONSTRAINT pk_users PRIMARY KEY users (id),
 MODIFY COLUMN username Varchar(30) unique;
 
--- movie database
+-- MOVIE DATABASE
 CREATE DATABASE movies;
 
 CREATE TABLE directors (
@@ -159,7 +159,7 @@ INSERT INTO movies (title, director_id, copyright_year, length, genre_id, catego
 ('Movie4', 4, 2015, 140, 4, 4, 9.0, 'Note 4'),
 ('Movie5', 5, 2020, 130, 5, 5, 7.8, 'Note 5');
 
--- car rental database
+-- CAR RENTAL DATABASE
 CREATE DATABASE car_rental;
 
 CREATE TABLE categories (
@@ -255,7 +255,7 @@ VALUES
 (2, 2, 2, 'Excellent', 0.90, 8000, 8100, 100, '2022-02-10', '2022-02-15', 5, 42.99, 0.12, 'Completed', 'Regular customer with a discount applied.'),
 (3, 3, 3, 'Very Good', 0.80, 12000, 12500, 500, '2022-03-20', '2022-03-25', 5, 38.99, 0.15, 'Completed', 'Special request for a specific car model.');
 
--- basic insert
+-- BASIC INSERT
 CREATE DATABASE soft_uni;
  
 CREATE TABLE towns (
@@ -323,26 +323,26 @@ VALUES ('Ivan', 'Ivanov', 'Ivanov', '.NET Developer', 4, '2013-02-01', 3500.00),
        ('Georgi', 'Terziev', 'Ivanov', 'CEO', 2, '2007-12-09', 3000.00),
        ('Peter', 'Pan', 'Pan', 'Intern', 3, '2016-08-28', 599.88);
 
--- basic select all fields
+-- BASIC SELECT ALL FIELDS
 SELECT * FROM towns;
 SELECT * FROM departments;
 SELECT * FROM employees;
 
--- basic select all fields and order them
+-- BASIC SELECT ALL FIELDS AND ORDER THEM
 SELECT * FROM towns ORDER BY name ASC;
 
 SELECT * FROM departments ORDER BY name ASC;
 
 SELECT * FROM employees ORDER BY salary DESC;
 
--- basic select some fields
+-- BASIC SELECT SOME FIELDS
 SELECT name FROM towns ORDER BY name;
 
 SELECT name FROM departments ORDER BY name;
 
 SELECT first_name, last_name, job_title, salary FROM employees ORDER BY salary DESC;
 
--- increase employees salary
+-- INCREASE EMPLOYEES SALARY
 UPDATE employees 
 SET salary = salary * 1.1;
 
