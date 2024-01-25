@@ -111,6 +111,8 @@ ORDER BY country_name;
 
 -- ALL DIABLO CHARACTERS
 USE diablo;
+SELECT name FROM characters 
+ORDER BY name;
 
 
 
