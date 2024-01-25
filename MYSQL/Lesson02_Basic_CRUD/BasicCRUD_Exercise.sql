@@ -1,4 +1,5 @@
 -- FIND ALL INFORMATION ABOUT DEPARTMENTS
+USE soft_uni;
 SELECT * FROM departments;
 
 -- FIND ALL DEPARTMENT NAMES 
@@ -91,6 +92,9 @@ WHERE department_id IN(1, 2, 4, 11);
 
 SELECT salary FROM employees;
 
+-- ALL MOUNTAIN PEAKS
+USE geography;
+SELECT peak_name FROM peaks ORDER BY peak_name;
 
 
 
