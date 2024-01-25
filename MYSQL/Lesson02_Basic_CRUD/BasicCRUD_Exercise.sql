@@ -41,3 +41,8 @@ WHERE salary = 25000 OR
 SELECT first_name, last_name FROM employees 
 WHERE manager_id IS NULL;
 
+-- FIND ALL EMPLOYEES WITH SALARY MORE THAN 50000
+SELECT first_name, last_name, salary FROM employees
+WHERE salary > 50000
+ORDER BY salary DESC;
+
