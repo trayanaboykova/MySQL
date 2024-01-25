@@ -36,3 +36,8 @@ WHERE salary = 25000 OR
 	  salary = 23600;
 -- this can also be:
 -- WHERE salary IN(25000, 14000, 12500, 23600);
+
+-- FIND ALL EMPLOYEES WITHOUT A MANAGER
+SELECT first_name, last_name FROM employees 
+WHERE manager_id IS NULL;
+
