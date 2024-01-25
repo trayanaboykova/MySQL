@@ -51,4 +51,12 @@ SELECT first_name, last_name FROM employees
 ORDER BY salary DESC
 LIMIT 5;
 
+-- FIND ALL EMPLOYEES EXCEPT MARKETING
+SELECT first_name, last_name FROM employees
+WHERE department_id != 4;
+
+-- SORT EMPLOYEES TABLE
+SELECT * FROM employees
+ORDER BY salary DESC, first_name, last_name DESC, middle_name;
+
 
