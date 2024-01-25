@@ -27,5 +27,12 @@ WHERE salary >= 20000 AND salary <= 30000
 -- WHERE salary BETWEEN 20000 AND 30000;
 ORDER BY employee_id;
 
-
-
+-- FIND NAMES OF ALL EMPLOYEES
+SELECT CONCAT(first_name, ' ', middle_name, ' ', last_name) AS `Full Name`
+FROM employees
+WHERE salary = 25000 OR 
+	  salary = 14000 OR 
+	  salary = 12500 OR 
+	  salary = 23600;
+-- this can also be:
+-- WHERE salary IN(25000, 14000, 12500, 23600);
