@@ -19,3 +19,13 @@ SELECT DISTINCT salary FROM employees;
 -- FIND ALL INFORMATION ABOUT EMPLOYEES
 SELECT * FROM employees
 WHERE job_title = 'Sales Representative' ORDER BY employee_id; 
+
+-- FIND NAMES OF ALL EMPLOYEES BY SALARY IN RANGE
+SELECT first_name, last_name, job_title FROM employees
+WHERE salary >= 20000 AND salary <= 30000
+-- this can also be:
+-- WHERE salary BETWEEN 20000 AND 30000;
+ORDER BY employee_id;
+
+
+
