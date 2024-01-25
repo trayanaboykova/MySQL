@@ -104,6 +104,13 @@ ORDER BY population DESC, country_name
 LIMIT 30;
 
 -- COUNTRIES AND CURRENCY (EURO / NOT EURO)
+SELECT * from countries;
+SELECT country_name, country_code, IF(currency_code = 'EUR', 'Euro', 'Not Euro') AS currency
+FROM countries
+ORDER BY country_name;
+
+-- ALL DIABLO CHARACTERS
+USE diablo;
 
 
 
