@@ -12,3 +12,7 @@ SELECT name FROM departments ORDER BY department_id;
 
 -- FIND EMAIL ADDRESS OF EACH EMPLOYEE
 SELECT CONCAT(first_name, '.', last_name, '@softuni.bg') FROM employees;
+
+-- FIND ALL DIFFERENT EMPLOYEES' SALARIES
+SELECT DISTINCT salary FROM employees;
+
