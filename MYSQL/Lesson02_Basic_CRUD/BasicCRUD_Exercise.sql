@@ -1,0 +1,5 @@
+-- FIND ALL INFORMATION ABOUT DEPARTMENTS
+SELECT * FROM departments;
+
+-- FIND ALL DEPARTMENT NAMES 
+SELECT name FROM departments ORDER BY department_id;
