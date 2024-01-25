@@ -71,9 +71,15 @@ FROM employees;
 -- DISTINCT JOB TITLES
 SELECT DISTINCT job_title FROM employees ORDER BY job_title;
 
+-- FIND FIRST 10 STARTED PROJECTS
+SELECT * FROM projects
+ORDER BY start_date, name
+LIMIT 10;
 
-
-
+-- LAST 7 HIRED EMPLOYEES
+SELECT first_name, last_name, hire_date FROM employees
+ORDER BY hire_date DESC
+LIMIT 7;
 
 
 
