@@ -97,8 +97,13 @@ USE geography;
 SELECT peak_name FROM peaks ORDER BY peak_name;
 
 
+-- BIGGEST COUNTRIES BY POPULATION
+SELECT country_name, population FROM countries
+WHERE continent_code = 'EU'
+ORDER BY population DESC, country_name
+LIMIT 30;
 
-
+-- COUNTRIES AND CURRENCY (EURO / NOT EURO)
 
 
 
