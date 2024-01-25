@@ -16,3 +16,6 @@ SELECT CONCAT(first_name, '.', last_name, '@softuni.bg') FROM employees;
 -- FIND ALL DIFFERENT EMPLOYEES' SALARIES
 SELECT DISTINCT salary FROM employees;
 
+-- FIND ALL INFORMATION ABOUT EMPLOYEES
+SELECT * FROM employees
+WHERE job_title = 'Sales Representative' ORDER BY employee_id; 
