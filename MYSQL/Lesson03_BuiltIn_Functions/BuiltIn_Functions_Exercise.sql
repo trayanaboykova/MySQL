@@ -23,6 +23,11 @@ ORDER BY employee_id;
 SELECT name FROM towns
 WHERE LENGTH(name) = 5 OR LENGTH(name) = 6
 ORDER by name;
+
+-- FIND TOWNS STARTING WITH
+SELECT town_id, name FROM towns
+WHERE LEFT(name, 1) IN('M', 'K', 'B', 'E')
+ORDER BY name;
  
  
  
