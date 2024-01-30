@@ -61,3 +61,8 @@ ORDER BY mix;
 SELECT name, DATE_FORMAT(start, '%Y-%m-%d') as START FROM games
 WHERE YEAR(start) IN(2011,2012)
 ORDER BY start LIMIT 50;
+
+-- USER EMAIL PROVIDERS
+SELECT user_name, SUBSTRING(email, LOCATE('@',email)+1)
+AS 'email_provider' FROM users
+ORDER BY email_provider, user_name;
