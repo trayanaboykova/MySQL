@@ -83,7 +83,7 @@ CASE
 	WHEN duration < 4 THEN 'Extra Short'
 	WHEN duration < 7 THEN 'Short'
 	WHEN duration < 11 THEN 'Long'
-    ELSE 'EXTRA LONG'
+    ELSE 'Extra Long'
 END AS 'Duration'
 FROM games;
 
