@@ -13,3 +13,31 @@ SELECT first_name FROM employees
 WHERE (department_id = 3 OR department_id = 10) AND
 	  YEAR(hire_date) BETWEEN 1995 AND 2005
 ORDER BY employee_id;
+
+-- FIND ALL EMPLOYEES EXCEPT ENGINEERS	 
+SELECT first_name, last_name FROM employees
+WHERE job_title NOT LIKE '%engineer%'
+ORDER BY employee_id;
+ 
+-- FIND TOWNS WITH NAME LENGHT 
+SELECT name FROM towns
+WHERE LENGTH(name) = 5 OR LENGTH(name) = 6
+ORDER by name;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
