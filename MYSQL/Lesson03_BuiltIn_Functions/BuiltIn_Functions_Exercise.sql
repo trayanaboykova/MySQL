@@ -34,7 +34,16 @@ SELECT town_id, name FROM towns
 WHERE LEFT(name, 1) NOT IN('R', 'B', 'D')
 ORDER BY name;
 
- 
+-- CREATE VIEW EMPLOYYES HIRED AFTER 2000 YEAR
+CREATE VIEW v_employees_hired_after_2000 AS
+SELECT first_name, last_name FROM employees
+WHERE YEAR(hire_date) > 2000;
+SELECT * FROM v_employees_hired_after_2000;
+
+-- LENGTH OF LAST NAME
+SELECT first_name, last_name
+FROM employees
+WHERE LENGTH(last_name) = 5;
  
  
  
