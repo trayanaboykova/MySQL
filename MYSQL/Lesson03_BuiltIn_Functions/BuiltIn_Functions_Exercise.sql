@@ -29,6 +29,11 @@ SELECT town_id, name FROM towns
 WHERE LEFT(name, 1) IN('M', 'K', 'B', 'E')
 ORDER BY name;
  
+ -- FIND TOWNS NOT STARTING WITH
+SELECT town_id, name FROM towns
+WHERE LEFT(name, 1) NOT IN('R', 'B', 'D')
+ORDER BY name;
+
  
  
  
