@@ -15,9 +15,11 @@ SELECT department_id, MIN(ROUND(salary, 2)) AS min_salary
 FROM employees
 GROUP BY department_id
 HAVING MIN(salary) > 800
-ORDER BY department_id;
+ORDER BY department_id;  
 
 -- APPETIZERS COUNT
-
+SELECT COUNT(*)
+FROM products
+WHERE category_id = 2 AND price > 8;
 
 -- MENU PRICES
