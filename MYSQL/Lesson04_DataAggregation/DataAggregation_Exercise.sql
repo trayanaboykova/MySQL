@@ -2,6 +2,9 @@
 SELECT COUNT(*) AS count FROM wizzard_deposits;
 
 -- LONGEST MAGIC WAND
+SELECT MAX(magic_wand_size) AS longest_magic_wand
+FROM wizzard_deposits;
+
 -- LONGEST MAGIC PER DEPOSIT GROUPS
 -- SMALLEST DEPOSIT GROUP PER MAGIC WAND SIZE
 -- DEPOSITS SUM
