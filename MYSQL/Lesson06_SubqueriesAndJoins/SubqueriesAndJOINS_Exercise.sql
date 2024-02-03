@@ -17,14 +17,31 @@ ORDER BY e.first_name, e.last_name
 LIMIT 5;
 
 -- SALES EMPLOYEE
-SELECT e.employee_id, e.first_name, e.last_name, d.name
+SELECT e.employee_id, e.first_name, e.last_name, d.name AS department_name
 FROM employees AS e
 JOIN departments d 
 ON e.department_id = d.department_id
+WHERE d.name = 'Sales'
 ORDER BY e.employee_id DESC;
 
 -- EMPLOYEE DEPARTMENTS
+SELECT e.employee_id, e.first_name, e.salary, d.name AS department_name
+FROM employees AS e
+JOIN departments d 
+ON e.department_id = d.department_id
+WHERE e.salary > 15000
+ORDER BY d.department_id DESC
+LIMIT 5;
+
 -- EMPLOYEE WITHOUT PROJECTS
+SELECT e.employee_id, e.first_name
+FROM employees AS e
+LEFT JOIN employees_projects ep
+ON e.employee_id = ep.employee_id
+WHERE ep.project_id IS NULL
+ORDER BY e.employee_id DESC
+LIMIT 3;
+
 -- EMPLOYEE HIRED AFTER
 -- EMPLOYEE WITH PROJECTS
 -- EMPLOYEE 24
