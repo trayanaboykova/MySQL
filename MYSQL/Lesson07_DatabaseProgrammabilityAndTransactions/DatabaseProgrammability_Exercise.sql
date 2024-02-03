@@ -132,7 +132,17 @@ DELIMITER ;
 CALL usp_get_holders_with_balance_higher_than(7000);
 
 -- FUTURE VALUE FUNCTION
+DELIMITER $
+CREATE FUNCTION ufn_calculate_future_value(initial DECIMAL(19,4), interest_rate DOUBLE, numYears INT)  
+RETURNS DECIMAL(19,4)
+READS SQL DATA
+BEGIN
+	RETURN initial * POW(1 + interest_rate, numYears);
+END $
 
+DELIMITER ;
+
+SELECT ufn_calculate_future_value(1000, 0.5, 5);
 
 -- CALCULATING INTEREST
 
