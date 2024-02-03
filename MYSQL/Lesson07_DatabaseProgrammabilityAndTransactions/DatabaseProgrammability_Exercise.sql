@@ -86,7 +86,18 @@ DELIMITER ;
 CALL usp_get_employees_by_salary_level('High');
 
 -- DEFINE FUNCTION
+DELIMITER $
+CREATE FUNCTION ufn_is_word_comprised(set_of_letters VARCHAR(50), word VARCHAR(50))  
+RETURNS TINYINT
+DETERMINISTIC
+BEGIN
+	RETURN word REGEXP CONCAT('^[', set_of_letters, ']+$');
+END $
 
+DELIMITER ;
+
+SELECT 'Sofia' REGEXP '^[oistmiahf]+$';
+SELECT ufn_is_word_comprised('bobr', 'Rob');
 
 -- FIND FULL NAME
 
