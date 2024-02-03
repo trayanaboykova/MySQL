@@ -135,14 +135,35 @@ ORDER BY e.employee_id
 LIMIT 5;
 
 -- MIN AVERAGE SALARY
-SELECT AVG(salary) AS min_average_salary
-FROM employees
+SELECT 
+    AVG(salary) AS min_average_salary
+FROM
+    employees
 GROUP BY department_id
 ORDER BY min_average_salary
 LIMIT 1;
 
 -- HIGHEST PEAKS IN BULGARIA
+SELECT 
+    c.country_code, 
+    m.mountain_range, 
+    p.peak_name, 
+    p.elevation
+FROM
+    countries c
+        JOIN
+    mountains_countries mc ON c.country_code = mc.country_code
+        JOIN
+    mountains m ON mc.mountain_id = m.id
+        JOIN
+    peaks p ON m.id = p.mountain_id
+WHERE
+    c.country_code = 'BG'
+        AND p.elevation > 2835
+ORDER BY p.elevation DESC;
+
 -- COUNT MOUNTAIN RANGES
+
 -- COUNTRIES WITH RIVERS
 -- CONTINENTS AND CURRENCIES
 -- COUNTRIES WITHOUT ANY MOUNTAINS 
