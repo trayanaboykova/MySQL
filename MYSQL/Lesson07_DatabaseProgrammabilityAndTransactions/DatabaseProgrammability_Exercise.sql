@@ -133,7 +133,7 @@ CALL usp_get_holders_with_balance_higher_than(7000);
 
 -- FUTURE VALUE FUNCTION
 DELIMITER $
-CREATE FUNCTION ufn_calculate_future_value(initial DECIMAL(19,4), interest_rate DOUBLE, numYears INT)  
+CREATE FUNCTION ufn_calculate_future_value(initial DECIMAL(19,4), interest_rate DECIMAL(19,4), numYears INT)  
 RETURNS DECIMAL(19,4)
 READS SQL DATA
 BEGIN
@@ -145,13 +145,59 @@ DELIMITER ;
 SELECT ufn_calculate_future_value(1000, 0.5, 5);
 
 -- CALCULATING INTEREST
+DELIMITER $
+CREATE PROCEDURE usp_calculate_future_value_for_account(acc_id INT, interest DECIMAL(19,5))
+BEGIN
+	SELECT a.id AS account_id, 
+    ah.first_name, ah.last_name, 
+    a.balance AS current_balance,
+    ufn_calculate_future_value(a.balance, interest, 5) AS balance_in_5_years
+    FROM account_holders ah
+    JOIN accounts a ON ah.id = a.account_holder_id
+    WHERE a.id = acc_id;
+END $
 
+DELIMITER ;
+
+CALL usp_calculate_future_value_for_account(1, 0.1);
 
 -- DEPOSIT MONEY
+DELIMITER $
+CREATE PROCEDURE usp_deposit_money(acc_id INT, money_amount DECIMAL(10,4))
+BEGIN
+	START TRANSACTION;
+	IF ((SELECT COUNT(*) FROM accounts 
+		 WHERE id = acc_id) <> 1 OR money_amount < 0) 
+         THEN ROLLBACK;
+    ELSE 
+		UPDATE accounts SET balance = balance + money_amount 
+        WHERE id = acc_id;
+        COMMIT;
+	END IF; 
+END $
 
+DELIMITER ;
+
+CALL usp_deposit_money(1, 10);
 
 -- WITHDRAW MONEY
+DELIMITER $
+CREATE PROCEDURE usp_withdraw_money(acc_id INT, money_amount DECIMAL(10,4))
+BEGIN
+	START TRANSACTION;
+	IF ((SELECT COUNT(*) FROM accounts 
+		 WHERE id = acc_id) <> 1 OR money_amount < 0) 
+         THEN ROLLBACK;
+    ELSE 
+		UPDATE accounts SET balance = balance - money_amount 
+        WHERE id = acc_id;
+        COMMIT;
+	END IF; 
+END $
 
+DELIMITER ;
+
+CALL usp_withdraw_money(1, 10);
 
 -- MONEY TRANSFER
 
