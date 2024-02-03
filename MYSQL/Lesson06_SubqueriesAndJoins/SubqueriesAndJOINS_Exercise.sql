@@ -173,6 +173,19 @@ GROUP BY mc.country_code
 ORDER BY mountain_range DESC;
 
 -- COUNTRIES WITH RIVERS
+SELECT 
+    c.country_name, r.river_name
+FROM
+    countries c
+        LEFT JOIN
+    countries_rivers cr ON c.country_code = cr.country_code
+        LEFT JOIN
+    rivers r ON cr.river_id = r.id
+WHERE
+    c.continent_code = 'AF'
+ORDER BY c.country_name
+LIMIT 5;
+
 -- CONTINENTS AND CURRENCIES
 -- COUNTRIES WITHOUT ANY MOUNTAINS 
 -- HIGHEST PEAK AND LONGEST RIVER BY COUNTRY
