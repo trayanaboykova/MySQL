@@ -61,7 +61,7 @@ department_id INT,
 salary DOUBLE
 );
 
-CREATE TRIGGER trigger_deleted_employees
+CREATE TRIGGER deleted_employees_trigger
 AFTER DELETE
 ON employees
 FOR EACH ROW
