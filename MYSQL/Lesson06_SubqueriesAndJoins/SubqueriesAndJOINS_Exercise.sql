@@ -135,6 +135,12 @@ ORDER BY e.employee_id
 LIMIT 5;
 
 -- MIN AVERAGE SALARY
+SELECT AVG(salary) AS min_average_salary
+FROM employees
+GROUP BY department_id
+ORDER BY min_average_salary
+LIMIT 1;
+
 -- HIGHEST PEAKS IN BULGARIA
 -- COUNT MOUNTAIN RANGES
 -- COUNTRIES WITH RIVERS
