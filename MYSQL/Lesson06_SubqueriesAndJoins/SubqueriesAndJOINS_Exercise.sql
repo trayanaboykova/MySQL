@@ -163,6 +163,14 @@ WHERE
 ORDER BY p.elevation DESC;
 
 -- COUNT MOUNTAIN RANGES
+SELECT 
+    mc.country_code, COUNT(*) AS mountain_range
+FROM
+    mountains_countries mc
+WHERE
+    mc.country_code IN ('BG' , 'RU', 'US')
+GROUP BY mc.country_code
+ORDER BY mountain_range DESC;
 
 -- COUNTRIES WITH RIVERS
 -- CONTINENTS AND CURRENCIES
