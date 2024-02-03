@@ -247,3 +247,28 @@ CALL usp_deposit_money(1,10);
 SELECT * FROM logs;
 
 -- EMAILS TRIGGER
+CREATE TABLE notification_emails(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	recipient INT NOT NULL,
+	subject VARCHAR(2000),
+	body TEXT
+);
+
+DELIMITER $
+
+CREATE TRIGGER tr_insert
+AFTER UPDATE
+ON logs
+FOR EACH ROW
+BEGIN
+	INSERT INTO notification_emails(recipient, subject, body) 
+    VALUES (new.account_id,
+    CONCAT('Balance change for account: ', new.account_id),
+    CONCAT('On ', DATE_FORMAT(NOW(), '%b %d %Y at %r'),
+    ' your balance was changed from ', ROUND(new.old.sum, 0), ' to ',
+    ROUND(new.new_sum, 0), '.'));
+END $
+
+DELIMITER ; 
+
+SELECT DATE_FORMAT(NOW(), '%b %d %Y at %r');
