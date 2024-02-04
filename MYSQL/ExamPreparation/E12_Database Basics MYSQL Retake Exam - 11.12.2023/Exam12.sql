@@ -60,3 +60,25 @@ SELECT
     LENGTH(first_name) * 50.6 AS cost
 FROM passengers
 WHERE id <= 5;
+
+-- UPDATE
+UPDATE flights
+SET airplane_id = airplane_id + 1
+WHERE departure_country = (SELECT id FROM countries WHERE name = 'Armenia');
+
+-- DELETE
+DELETE FROM flights
+WHERE id NOT IN (SELECT DISTINCT flight_id FROM flights_passengers);
+
+-- AIRPLANES
+SELECT
+    id,
+    model,
+    passengers_capacity,
+    tank_capacity,
+    cost
+FROM
+    airplanes
+ORDER BY
+    cost DESC, id DESC;
+
