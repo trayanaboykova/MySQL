@@ -97,6 +97,30 @@ SET
 WHERE
     price >= 800000;
 
+-- DELETE
+DELETE FROM property_transactions 
+WHERE
+    is_successful != TRUE;
+    
+-- AGENTS
+SELECT 
+    id, first_name, last_name, phone, email, city_id
+FROM
+    agents
+ORDER BY city_id DESC , phone DESC;
+
+-- OFFERS FROM 2021
+SELECT property_id, agent_id, price, offer_datetime
+FROM property_offers
+WHERE YEAR(offer_datetime) = 2021
+ORDER BY price ASC
+LIMIT 10;
+
+
+
+
+
+
 
 
 
