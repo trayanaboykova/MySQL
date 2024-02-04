@@ -154,12 +154,38 @@ ORDER BY
     area ASC,
     address DESC;
 
+-- OFFERS COUNT IN A CITY
+DELIMITER $
 
+CREATE FUNCTION udf_offers_from_city_name(cityName VARCHAR(50)) 
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE offers_count INT;
+SELECT 
+    COUNT(*)
+INTO offers_count FROM
+    property_offers po
+        JOIN
+    properties p ON po.property_id = p.id
+        JOIN
+    cities c ON p.city_id = c.id
+WHERE
+    c.name = cityName;
 
+    RETURN offers_count;
+END $
 
+DELIMITER ;
 
+-- SPECIAL OFFER
+DELIMITER $
 
+CREATE PROCEDURE udp_special_offer(IN agentFirstName VARCHAR(50))
+BEGIN
+    UPDATE property_offers
+    SET price = price * 0.9
+    WHERE agent_id IN (SELECT id FROM agents WHERE first_name = agentFirstName);
+END $
 
-
-
-
+DELIMITER ;
