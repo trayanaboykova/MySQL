@@ -135,20 +135,44 @@ ORDER BY students_count DESC , university_name DESC;
 
 -- PRICE RANKINGS
 SELECT 
-	u.name AS university_name,
-    c.name AS city_name, 
+    u.name AS university_name,
+    c.name AS city_name,
     u.address,
     CASE
-		WHEN u.tuition_fee < 800 THEN 'cheap'
-		WHEN u.tuition_fee < 1200 THEN 'normal'
-		WHEN u.tuition_fee < 2500 THEN 'high'
-		ELSE  'expensive'
-    END AS price_rank, 
+        WHEN u.tuition_fee < 800 THEN 'cheap'
+        WHEN u.tuition_fee < 1200 THEN 'normal'
+        WHEN u.tuition_fee < 2500 THEN 'high'
+        ELSE 'expensive'
+    END AS price_rank,
     u.tuition_fee
-FROM universities u
-JOIN cities c ON u.city_id = c.id
+FROM
+    universities u
+        JOIN
+    cities c ON u.city_id = c.id
 ORDER BY tuition_fee;
 
+-- AVERAGE GRADES
+DELIMITER $
+
+CREATE FUNCTION udf_average_alumni_grade_by_course_name(course_name VARCHAR(60))
+RETURNS DECIMAL(10,2)
+DETERMINISTIC
+BEGIN
+	DECLARE result DECIMAL(10,2);
+    SET RESULT := (
+			SELECT AVG(sc.grade) FROM courses c
+            JOIN students_courses sc ON c.id = sc.course_id
+            JOIN students s ON sc.student_id = s.id
+            WHERE c.name = course_name AND s.is_graduated = 1
+            GROUP BY c.id
+    );
+    RETURN result;
+END $
+
+DELIMITER ;
+
+-- GRADUATE STUDENTS
+	
 
 
 
