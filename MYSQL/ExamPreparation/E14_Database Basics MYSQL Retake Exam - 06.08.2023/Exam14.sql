@@ -116,6 +116,43 @@ WHERE YEAR(offer_datetime) = 2021
 ORDER BY price ASC
 LIMIT 10;
 
+-- PROPERTIES WITHOUT OFFERS
+SELECT 
+    LEFT(properties.address, 6) AS agent_name,
+    LENGTH(properties.address) * 5430 AS price
+FROM
+    properties
+        LEFT JOIN
+    property_offers ON properties.id = property_offers.property_id
+WHERE
+    property_offers.property_id IS NULL
+        AND property_offers.agent_id IS NULL
+ORDER BY agent_name DESC , price DESC;
+
+-- BEST BANKS
+SELECT 
+    bank_name, COUNT(DISTINCT iban) AS count
+FROM
+    property_transactions
+GROUP BY bank_name
+HAVING count >= 9
+ORDER BY count DESC , bank_name ASC;
+
+-- SIZE OF THE AREA
+SELECT
+    address,
+    area,
+    CASE
+        WHEN area <= 100 THEN 'small'
+        WHEN area <= 200 THEN 'medium'
+        WHEN area <= 500 THEN 'large'
+        ELSE 'extra large'
+    END AS size
+FROM
+    properties
+ORDER BY
+    area ASC,
+    address DESC;
 
 
 
