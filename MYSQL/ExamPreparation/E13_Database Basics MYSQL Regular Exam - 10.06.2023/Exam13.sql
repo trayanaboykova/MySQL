@@ -71,3 +71,23 @@ SELECT CONCAT(teacher_name, ' course'),
        DAY(start_date)
 FROM courses
 WHERE id <= 5;
+
+-- UPDATE
+UPDATE universities
+SET tuition_fee = tuition_fee + 300
+WHERE id BETWEEN 5 AND 12;
+
+-- DELETE
+DELETE FROM universities
+WHERE number_of_staff IS NULL;
+
+-- CITIES 
+SELECT * FROM cities 
+ORDER BY population DESC;
+
+-- STUDENTS AGE
+SELECT first_name, last_name, age, phone, email 
+FROM students
+WHERE age >= 21
+ORDER BY first_name DESC, email ASC, id ASC
+LIMIT 10;
