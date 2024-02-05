@@ -154,3 +154,44 @@ LEFT JOIN addresses ON offices.address_id = addresses.id
 WHERE games.release_date IS NULL AND games_categories.category_id IS NULL
 ORDER BY games.name;
 
+-- FIND ALL BASIC INFORMATION FOR A GAME
+DELIMITER //
+
+CREATE FUNCTION udf_game_info_by_name(game_name VARCHAR(20))
+RETURNS VARCHAR(255)
+BEGIN
+    DECLARE game_info VARCHAR(255);
+    
+    SELECT CONCAT('The ', game_name, ' is developed by a ', t.name,
+                  ' in an office with an address ', a.name)
+    INTO game_info
+    FROM games g
+    JOIN teams t ON g.team_id = t.id
+    JOIN offices o ON t.office_id = o.id
+    JOIN addresses a ON o.address_id = a.id
+    WHERE g.name = game_name;
+    
+    RETURN game_info;
+END //
+
+DELIMITER ;
+
+-- UPDATE THE BUDGET OF THE GAMES
+DELIMITER //
+
+CREATE PROCEDURE udp_update_budget(min_game_rating FLOAT)
+BEGIN
+    UPDATE games
+    SET
+        budget = budget + 100000,
+        release_date = DATE_ADD(release_date, INTERVAL 1 YEAR)
+    WHERE
+        rating > min_game_rating
+        AND release_date IS NOT NULL
+        AND id NOT IN (
+            SELECT DISTINCT game_id
+            FROM games_categories
+        );
+END //
+
+DELIMITER ;
