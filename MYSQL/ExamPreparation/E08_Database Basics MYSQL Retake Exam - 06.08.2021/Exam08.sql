@@ -108,10 +108,49 @@ SELECT
     ROUND(AVG(games.budget), 2) AS avg_budget,
     MAX(games.rating) AS max_rating
 FROM categories
-LEFT JOIN games_categories ON categories.id = games_categories.category_id
-LEFT JOIN games ON games_categories.game_id = games.id
+JOIN games_categories ON categories.id = games_categories.category_id
+JOIN games ON games_categories.game_id = games.id
 GROUP BY categories.name
-HAVING max_rating > 9.5
+HAVING max_rating >= 9.5
 ORDER BY games_count DESC, name;
 
 -- GAMES OF 2022
+SELECT 
+    g.name,
+    g.release_date,
+    CONCAT(SUBSTRING(g.description, 1, 10), '...') AS summary,
+    (CASE
+        WHEN MONTH(g.release_date) BETWEEN 1 AND 3 THEN 'Q1'
+        WHEN MONTH(g.release_date) BETWEEN 4 AND 6 THEN 'Q2'
+        WHEN MONTH(g.release_date) BETWEEN 7 AND 9 THEN 'Q3'
+        WHEN MONTH(g.release_date) BETWEEN 10 AND 12 THEN 'Q4'
+    END) AS querter,
+    t.name AS team_name
+FROM
+    games AS g
+        JOIN
+    teams AS t ON t.id = g.team_id
+WHERE
+    YEAR(g.release_date) = 2022
+        AND MONTH(g.release_date) IS NOT NULL
+        AND MONTH(g.release_date) % 2 = 0
+        AND g.name LIKE '%2'
+ORDER BY querter;
+
+-- FULL INFO FOR GAMES
+SELECT
+    games.name AS name,
+    CASE
+        WHEN games.budget < 50000 THEN 'Normal budget'
+        ELSE 'Insufficient budget'
+    END AS budget_level,
+    teams.name AS team_name,
+    addresses.name AS address_name
+FROM games
+LEFT JOIN games_categories ON games.id = games_categories.game_id
+LEFT JOIN teams ON games.team_id = teams.id
+LEFT JOIN offices ON teams.office_id = offices.id
+LEFT JOIN addresses ON offices.address_id = addresses.id
+WHERE games.release_date IS NULL AND games_categories.category_id IS NULL
+ORDER BY games.name;
+
