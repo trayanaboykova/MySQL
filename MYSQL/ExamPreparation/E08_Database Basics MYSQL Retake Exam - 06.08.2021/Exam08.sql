@@ -92,7 +92,7 @@ ORDER BY salary, id;
 
 -- ADDRESSES OF THE TEAMS 
 SELECT
-    CONCAT(teams.name, ' ', teams.leader_id) AS team_name,
+    teams.name AS team_name,
     addresses.name AS address_name,
     LENGTH(addresses.name) AS count_of_characters
 FROM teams
@@ -102,3 +102,16 @@ WHERE offices.website IS NOT NULL
 ORDER BY team_name, address_name;
 
 -- CATEGORIES INFO
+SELECT
+    categories.name AS name,
+    COUNT(games.id) AS games_count,
+    ROUND(AVG(games.budget), 2) AS avg_budget,
+    MAX(games.rating) AS max_rating
+FROM categories
+LEFT JOIN games_categories ON categories.id = games_categories.category_id
+LEFT JOIN games ON games_categories.game_id = games.id
+GROUP BY categories.name
+HAVING max_rating > 9.5
+ORDER BY games_count DESC, name;
+
+-- GAMES OF 2022
