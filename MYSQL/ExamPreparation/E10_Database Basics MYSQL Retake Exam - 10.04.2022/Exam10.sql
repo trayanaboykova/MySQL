@@ -117,8 +117,71 @@ WHERE id NOT IN (
 )
 ORDER BY height ASC;
 
+-- INTERNATIONAL FESTIVAL
+SELECT 
+    c.name AS name,
+    COUNT(m.id) AS movies_count
+FROM countries c
+LEFT JOIN movies m ON c.id = m.country_id
+GROUP BY c.name
+HAVING movies_count >= 7
+ORDER BY name DESC;
 
+-- RATING SYSTEM
+SELECT 
+    m.title,
+    CASE 
+        WHEN mai.rating <= 4 THEN 'poor'
+        WHEN mai.rating <= 7 THEN 'good'
+        ELSE 'excellent'
+    END AS rating,
+    CASE 
+        WHEN mai.has_subtitles = 1 THEN 'english'
+        ELSE '-'
+    END AS subtitles,
+    mai.budget
+FROM movies_additional_info mai
+JOIN movies m ON mai.id = m.movie_info_id
+ORDER BY mai.budget DESC;
 
+-- HISTORY MOVIES
+DELIMITER $
 
+CREATE FUNCTION udf_actor_history_movies_count(actor_name VARCHAR(50))
+RETURNS INT
+BEGIN
+    DECLARE history_count INT;
+    
+    SELECT COUNT(DISTINCT m.id) INTO history_count
+    FROM movies m
+    JOIN movies_actors ma ON m.id = ma.movie_id
+    JOIN actors a ON ma.actor_id = a.id
+    JOIN genres_movies gm ON m.id = gm.movie_id
+    JOIN genres g ON gm.genre_id = g.id
+    WHERE CONCAT(a.first_name, ' ', a.last_name) = actor_name
+    AND g.name = 'History';
+    
+    RETURN history_count;
+END $
 
+DELIMITER ;
 
+-- MOVIE AWARDS
+DELIMITER $
+
+CREATE PROCEDURE udp_award_movie(IN movie_title VARCHAR(50))
+BEGIN
+    DECLARE movie_id INT;
+    SELECT id INTO movie_id
+    FROM movies
+    WHERE title = movie_title;
+	UPDATE actors a
+    SET a.awards = a.awards + 1
+    WHERE EXISTS (
+        SELECT 1
+        FROM movies_actors ma
+        WHERE ma.movie_id = movie_id AND ma.actor_id = a.id
+    );
+END $
+
+DELIMITER ;
