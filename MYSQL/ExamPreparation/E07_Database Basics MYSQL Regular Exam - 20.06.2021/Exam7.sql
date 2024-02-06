@@ -74,9 +74,90 @@ WHERE LENGTH(full_name) > 3
 AND id NOT IN (SELECT DISTINCT client_id FROM courses);
 
 -- CARS
+SELECT make, model, `condition`
+FROM cars
+ORDER BY id;
+
 -- DRIVERS AND CARS
+SELECT
+    d.first_name,
+    d.last_name,
+    c.make,
+    c.model,
+    c.mileage
+FROM
+    drivers d
+JOIN
+    cars_drivers cd ON d.id = cd.driver_id
+JOIN
+    cars c ON cd.car_id = c.id
+WHERE
+    c.mileage IS NOT NULL
+ORDER BY
+    c.mileage DESC,
+    d.first_name;
+
 -- NUMBER OF COURSES
+SELECT
+    c.id AS car_id,
+    c.make,
+    c.mileage,
+    IFNULL(COUNT(co.car_id), 0) AS count_of_courses,
+    ROUND(AVG(co.bill), 2) AS avg_bill
+FROM
+    cars c
+LEFT JOIN
+    courses co ON c.id = co.car_id
+GROUP BY
+    c.id, c.make, c.mileage
+HAVING
+    count_of_courses != 2 OR count_of_courses IS NULL
+ORDER BY
+    count_of_courses DESC,
+    car_id;
+
 -- REGULAR CLIENTS
+SELECT
+    c.full_name,
+    COUNT(DISTINCT co.car_id) AS count_of_cars,
+    SUM(co.bill) AS total_sum
+FROM
+    clients c
+JOIN
+    courses co ON c.id = co.client_id
+WHERE
+    SUBSTRING(c.full_name, 2, 1) = 'a'
+GROUP BY
+    c.full_name
+HAVING
+    count_of_cars > 1
+ORDER BY
+    c.full_name;
+
 -- FULL INFO FOR COURSES
+SELECT
+    a.name AS name,
+    CASE
+        WHEN HOUR(co.start) BETWEEN 6 AND 20 THEN 'Day'
+        ELSE 'Night'
+    END AS day_time,
+    co.bill AS bill,
+    cl.full_name AS full_name,
+    ca.make AS make,
+    ca.model AS model,
+    cat.name AS category_name
+FROM
+    courses co
+JOIN
+    addresses a ON co.from_address_id = a.id
+JOIN
+    clients cl ON co.client_id = cl.id
+JOIN
+    cars ca ON co.car_id = ca.id
+JOIN
+    categories cat ON ca.category_id = cat.id
+ORDER BY
+    co.id;
+
 -- FIND ALL COURSES BY CLIENT’S PHONE NUMBER
 -- FULL INFO FOR ADDRESS
