@@ -41,7 +41,7 @@ CREATE TABLE movies(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(70) NOT NULL UNIQUE,
     country_id INT NOT NULL, 
-    movie_info_id INT NOT NULL,
+    movie_info_id INT NOT NULL UNIQUE,
 	CONSTRAINT fk_movies_countries
 	FOREIGN KEY (country_id) REFERENCES countries(id),
     CONSTRAINT fk_movies_movies_additional_info
