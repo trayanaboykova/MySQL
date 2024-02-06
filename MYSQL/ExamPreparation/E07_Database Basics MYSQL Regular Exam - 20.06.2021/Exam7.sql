@@ -160,4 +160,53 @@ ORDER BY
     co.id;
 
 -- FIND ALL COURSES BY CLIENT’S PHONE NUMBER
+DELIMITER $
+
+CREATE FUNCTION udf_courses_by_client (phone_num VARCHAR(20))
+RETURNS INT
+BEGIN
+    DECLARE course_count INT;
+
+    SELECT COUNT(*) INTO course_count
+    FROM clients c
+    JOIN courses co ON c.id = co.client_id
+    WHERE c.phone_number = phone_num;
+
+    RETURN course_count;
+END$
+
+DELIMITER ;
+
 -- FULL INFO FOR ADDRESS
+DELIMITER $
+
+CREATE PROCEDURE udp_courses_by_address(IN address_name VARCHAR(100))
+BEGIN
+    SELECT
+        a.name AS name,
+        cl.full_name AS full_name,
+        CASE
+            WHEN co.bill <= 20 THEN 'Low'
+            WHEN co.bill <= 30 THEN 'Medium'
+            ELSE 'High'
+        END AS level_of_bill,
+        ca.make AS make,
+        ca.`condition` AS `condition`,
+        cat.name AS cat_name
+    FROM
+        courses co
+    JOIN
+        addresses a ON co.from_address_id = a.id
+    JOIN
+        clients cl ON co.client_id = cl.id
+    JOIN
+        cars ca ON co.car_id = ca.id
+    JOIN
+        categories cat ON ca.category_id = cat.id
+    WHERE
+        a.name = address_name
+    ORDER BY
+        ca.make, cl.full_name;
+END$
+
+DELIMITER ;
