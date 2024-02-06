@@ -58,8 +58,21 @@ CREATE TABLE cars_drivers(
 );
 
 -- INSERT
+INSERT INTO clients (full_name, phone_number)
+SELECT CONCAT(first_name, ' ', last_name), CONCAT('(088) 9999', id * 2)
+FROM drivers
+WHERE id BETWEEN 10 AND 20;
+
 -- UPDATE
+UPDATE cars
+SET `condition` = 'C'
+WHERE (mileage > 800000 OR mileage IS NULL) AND year <= 2010 AND make != 'Mercedes-Benz';
+
 -- DELETE
+DELETE FROM clients
+WHERE LENGTH(full_name) > 3
+AND id NOT IN (SELECT DISTINCT client_id FROM courses);
+
 -- CARS
 -- DRIVERS AND CARS
 -- NUMBER OF COURSES
