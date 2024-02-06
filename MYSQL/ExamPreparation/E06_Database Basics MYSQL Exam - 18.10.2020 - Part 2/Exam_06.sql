@@ -78,9 +78,7 @@ WHERE ps.product_id IS NULL;
 UPDATE employees
 SET manager_id = 3, salary = salary - 500
 WHERE YEAR(hire_date) > 2003
-  AND store_id NOT IN (SELECT id FROM stores WHERE name IN ('Cardguard', 'Veribet'))
-  AND manager_id IS NOT NULL
-  AND salary >= 6000;
+  AND store_id NOT IN (SELECT id FROM stores WHERE name IN ('Cardguard', 'Veribet'));
 
 -- DELETE
 DELETE FROM employees
