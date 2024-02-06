@@ -68,12 +68,35 @@ CREATE TABLE employees(
 );
 
 -- INSERT
+INSERT INTO products_stores (product_id, store_id)
+SELECT p.id AS product_id, 1 AS store_id
+FROM products p
+LEFT JOIN products_stores ps ON p.id = ps.product_id
+WHERE ps.product_id IS NULL;
+
 -- UPDATE
+UPDATE employees
+SET manager_id = 3, salary = salary - 500
+WHERE YEAR(hire_date) > 2003
+  AND store_id NOT IN (SELECT id FROM stores WHERE name IN ('Cardguard', 'Veribet'))
+  AND manager_id IS NOT NULL
+  AND salary >= 6000;
+
 -- DELETE
+DELETE FROM employees
+WHERE manager_id IS NOT NULL
+  AND salary >= 6000;
+
 -- EMPLOYEES
+
 -- PRODUCTS WITH OLD PICTURES
+
 -- COUNTS OF PRODUCTS IN STORES
+
 -- SPECIFIC EMPLOYEE
+
 -- FIND ALL INFORMATION OF STORES
+
 -- FIND NAME OF TOP PAID EMPLOYEE BY STORE NAME
+
 -- UPDATE PRODUCT PRICE BY ADDRESS
