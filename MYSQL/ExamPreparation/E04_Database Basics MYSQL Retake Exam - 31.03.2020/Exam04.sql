@@ -70,3 +70,53 @@ SET country = CASE
 -- DELETE
 DELETE FROM addresses
 WHERE id % 3 = 0;
+
+-- USERS
+SELECT username, gender, age
+FROM users
+ORDER BY age DESC, username ASC;
+
+-- EXTRACT 5 MOST COMMENTED PHOTOS
+SELECT p.id, p.date AS date_and_time, p.description, COUNT(c.id) AS commentsCount
+FROM photos p
+LEFT JOIN comments c ON p.id = c.photo_id
+GROUP BY p.id, p.date, p.description
+ORDER BY commentsCount DESC, p.id ASC
+LIMIT 5;
+
+-- LUCKY USERS
+SELECT CONCAT(u.id, ' ', u.username) AS id_username, u.email
+FROM users u
+JOIN users_photos up ON u.id = up.user_id
+JOIN photos p ON up.photo_id = p.id
+WHERE u.id = p.id
+ORDER BY u.id ASC;
+
+-- COUNT LIKES AND COMMENTS
+SELECT 
+    p.id AS photo_id, 
+    COUNT(DISTINCT l.id) AS likes_count, 
+    COUNT(DISTINCT c.id) AS comments_count
+FROM 
+    photos p
+LEFT JOIN 
+    likes l ON p.id = l.photo_id
+LEFT JOIN 
+    comments c ON p.id = c.photo_id
+GROUP BY 
+    p.id
+ORDER BY 
+    likes_count DESC, 
+    comments_count DESC, 
+    photo_id ASC;
+    
+-- THE PHOTO ON THE TENTH DAY OF THE MONTH
+SELECT 
+    CONCAT(SUBSTRING(description, 1, 30), '...') AS summary, 
+    date
+FROM 
+    photos
+WHERE 
+    DAY(date) = 10
+ORDER BY 
+    date DESC;
