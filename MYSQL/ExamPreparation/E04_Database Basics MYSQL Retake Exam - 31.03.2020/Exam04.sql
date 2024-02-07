@@ -52,3 +52,21 @@ CREATE TABLE likes(
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+-- INSERT
+INSERT INTO addresses (address, town, country, user_id)
+SELECT username, password, ip, age
+FROM users
+WHERE gender = 'M';
+
+-- UPDATE
+UPDATE addresses
+SET country = CASE 
+                WHEN country LIKE 'B%' THEN 'Blocked'
+                WHEN country LIKE 'T%' THEN 'Test'
+                WHEN country LIKE 'P%' THEN 'In Progress'
+                ELSE country
+             END;
+
+-- DELETE
+DELETE FROM addresses
+WHERE id % 3 = 0;
