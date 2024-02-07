@@ -120,3 +120,32 @@ WHERE
     DAY(date) = 10
 ORDER BY 
     date DESC;
+    
+-- GET USER'S PHOTOS COUNT
+DELIMITER $
+CREATE FUNCTION udf_users_photos_count(username VARCHAR(30))
+RETURNS INT
+BEGIN
+    DECLARE photos_count INT;
+    SELECT COUNT(*) INTO photos_count
+    FROM users u
+    JOIN users_photos up ON u.id = up.user_id
+    WHERE u.username = username;
+    RETURN photos_count;
+END $
+
+DELIMITER ;
+
+-- INCREASE USER AGE
+DELIMITER $
+
+CREATE PROCEDURE udp_modify_user (IN address VARCHAR(30), IN town VARCHAR(30))
+BEGIN
+    -- Update the user's age
+    UPDATE users u
+    JOIN addresses a ON u.id = a.user_id
+    SET u.age = u.age + 10
+    WHERE a.address = address AND a.town = town;
+END $
+
+DELIMITER ;
