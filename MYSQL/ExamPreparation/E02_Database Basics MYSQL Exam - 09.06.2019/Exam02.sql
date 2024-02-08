@@ -114,4 +114,47 @@ GROUP BY b.id
 ORDER BY count_of_cards DESC, name;
 
 -- EXTRACT CARD'S COUNT
+DELIMITER $
+
+CREATE FUNCTION udf_client_cards_count(full_name VARCHAR(50))
+RETURNS INT
+BEGIN
+    DECLARE card_count INT;
+    
+    SELECT COUNT(cards.id) INTO card_count
+    FROM clients
+    JOIN bank_accounts ON clients.id = bank_accounts.client_id
+    JOIN cards ON bank_accounts.id = cards.bank_account_id
+    WHERE clients.full_name = full_name;
+    
+    RETURN card_count;
+END$
+
+DELIMITER ;
+
 -- CLIENT INFO
+DELIMITER $
+
+CREATE PROCEDURE udp_clientinfo(
+    IN p_full_name VARCHAR(50)
+)
+BEGIN
+    DECLARE v_age INT;
+    DECLARE v_account_number VARCHAR(10);
+    DECLARE v_balance DECIMAL(10,2);
+    
+    SELECT age, account_number, REPLACE(FORMAT(balance, 2), ',', '') AS balance
+    INTO v_age, v_account_number, v_balance
+    FROM (
+        SELECT c.age, ba.account_number, SUM(b.balance) AS balance
+        FROM clients c
+        JOIN bank_accounts ba ON c.id = ba.client_id
+        JOIN bank_accounts b ON c.id = b.client_id
+        WHERE c.full_name = p_full_name
+        GROUP BY c.age, ba.account_number
+    ) AS temp;
+    
+    SELECT p_full_name, v_age, v_account_number, CONCAT('$', v_balance);
+END$
+
+DELIMITER ;
