@@ -1,5 +1,6 @@
 CREATE DATABASE exam_01;
 USE exam_01;
+
 -- TABLE DESIGN
 CREATE TABLE planets(
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -50,12 +51,53 @@ CREATE TABLE travel_cards (
 );
 
 -- INSERT
+INSERT INTO travel_cards (card_number, job_during_journey, colonist_id, journey_id)
+SELECT 
+    CASE 
+        WHEN c.birth_date > '1980-01-01' THEN CONCAT(YEAR(c.birth_date), DAY(c.birth_date), LEFT(c.ucn, 4))
+        ELSE CONCAT(YEAR(c.birth_date), MONTH(c.birth_date), RIGHT(c.ucn, 4))
+    END AS card_number,
+    CASE 
+        WHEN c.id % 2 = 0 THEN 'Pilot'
+        WHEN c.id % 3 = 0 THEN 'Cook'
+        ELSE 'Engineer'
+    END AS job_during_journey,
+    c.id AS colonist_id,
+    LEFT(c.ucn, 1) AS journey_id
+FROM colonists c
+WHERE c.id BETWEEN 96 AND 100;
+
 -- UPDATE
+UPDATE journeys 
+INNER JOIN (
+    SELECT id,
+           CASE 
+               WHEN id % 2 = 0 THEN 'Medical'
+               WHEN id % 3 = 0 THEN 'Technical'
+               WHEN id % 5 = 0 THEN 'Educational'
+               WHEN id % 7 = 0 THEN 'Military'
+           END AS new_purpose
+    FROM journeys 
+    WHERE id % 2 = 0 OR id % 3 = 0 OR id % 5 = 0 OR id % 7 = 0
+) AS derived_table ON journeys.id = derived_table.id
+SET journeys.purpose = derived_table.new_purpose;
+
 -- DELETE
--- USERS
--- EXTRACT 5 MOST COMMENTED PHOTOS
--- LUCKY USERS
--- COUNT LIKES AND COMMENTS
--- THE PHOTO ON THE TENTH DAY OF THE MONTH
--- GET USER’S PHOTOS COUNT
--- INCREASE USER AGE
+DELETE FROM colonists
+WHERE id NOT IN (
+    SELECT colonist_id FROM travel_cards
+);
+
+-- EXTRACT ALL TRAVEL CARDS
+-- EXTRACT ALL COLONISTS
+-- EXTRACT ALL MILITARY JOURNEYS
+-- EXTRACT ALL PILOTS
+-- COUNT ALL COLONISTS
+-- EXTRACT THE FASTEST SPACESHIP
+-- EXTRACT - PILOTS YOUNGER THAN 30 YEARS
+-- EXTRACT ALL EDUCATIONAL MISSION
+-- EXTRACT ALL PLANETS AND THEIR JOURNEY COUNT
+-- EXTRACT THE SHORTEST JOURNEY
+-- EXTRACT THE LESS POPULAR JOB
+-- GET COLONISTS COUNT
+-- MODIFY SPACESHIP
