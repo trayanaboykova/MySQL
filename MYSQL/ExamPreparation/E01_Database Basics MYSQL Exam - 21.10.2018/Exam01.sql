@@ -191,4 +191,45 @@ ORDER BY COUNT(tc.colonist_id) ASC
 LIMIT 1;
 
 -- GET COLONISTS COUNT
+DELIMITER $
+CREATE FUNCTION udf_count_colonists_by_destination_planet(planet_name VARCHAR(30))
+RETURNS INT
+BEGIN
+    DECLARE colonist_count INT;
+    
+    SELECT COUNT(c.id) INTO colonist_count
+    FROM colonists c
+    JOIN travel_cards tc ON c.id = tc.colonist_id
+    JOIN journeys j ON tc.journey_id = j.id
+    JOIN spaceports sp ON j.destination_spaceport_id = sp.id
+    JOIN planets p ON sp.planet_id = p.id
+    WHERE p.name = planet_name;
+
+    RETURN colonist_count;
+END$
+
+DELIMITER ;
+
 -- MODIFY SPACESHIP
+DELIMITER //
+
+CREATE PROCEDURE udp_modify_spaceship_light_speed_rate(
+    IN spaceship_name VARCHAR(50),
+    IN light_speed_rate_increase INT
+)
+BEGIN
+    DECLARE existing_spaceship INT;
+	SELECT COUNT(*) INTO existing_spaceship
+    FROM spaceships
+    WHERE name = spaceship_name;
+    IF existing_spaceship = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Spaceship you are trying to modify does not exist.';
+    ELSE
+        UPDATE spaceships
+        SET light_speed_rate = light_speed_rate + light_speed_rate_increase
+        WHERE name = spaceship_name;
+    END IF;
+END //
+
+DELIMITER ;
