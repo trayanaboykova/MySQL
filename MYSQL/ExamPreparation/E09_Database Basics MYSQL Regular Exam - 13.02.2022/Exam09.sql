@@ -58,8 +58,24 @@ CREATE TABLE orders_products(
 );
 
 -- INSERT
+INSERT INTO reviews (content, picture_url, published_at, rating)
+SELECT 
+    SUBSTRING(description, 1, 15) AS content,
+    REVERSE(name) AS picture_url,
+    '2010-10-10' AS published_at,
+    price / 8 AS rating
+FROM products
+WHERE id >= 5;
+
 -- UPDATE
+UPDATE products
+SET quantity_in_stock = quantity_in_stock - 5
+WHERE quantity_in_stock BETWEEN 60 AND 70;
+
 -- DELETE
+DELETE FROM customers
+WHERE id NOT IN (SELECT DISTINCT customer_id FROM orders);
+
 -- CATEGORIES
 -- QUANTITY
 -- REVIEW
