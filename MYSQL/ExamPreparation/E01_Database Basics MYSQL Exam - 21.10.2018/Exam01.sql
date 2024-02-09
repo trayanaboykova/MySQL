@@ -89,15 +89,106 @@ WHERE id NOT IN (
 );
 
 -- EXTRACT ALL TRAVEL CARDS
+SELECT card_number, job_during_journey
+FROM travel_cards
+ORDER BY card_number ASC;
+
 -- EXTRACT ALL COLONISTS
+SELECT id,
+       CONCAT(first_name, ' ', last_name) AS full_name,
+       ucn
+FROM colonists
+ORDER BY first_name ASC, last_name ASC, id ASC;
+
 -- EXTRACT ALL MILITARY JOURNEYS
+SELECT id, journey_start, journey_end
+FROM journeys
+WHERE purpose = 'Military'
+ORDER BY journey_start ASC;
+
 -- EXTRACT ALL PILOTS
+SELECT c.id,
+       CONCAT(c.first_name, ' ', c.last_name) AS full_name
+FROM colonists c
+JOIN travel_cards tc ON c.id = tc.colonist_id
+WHERE tc.job_during_journey = 'Pilot'
+ORDER BY c.id ASC;
+
 -- COUNT ALL COLONISTS
+SELECT COUNT(DISTINCT colonist_id) AS count
+FROM travel_cards
+WHERE journey_id IN (
+    SELECT id
+    FROM journeys
+    WHERE purpose = 'Technical'
+);
+
 -- EXTRACT THE FASTEST SPACESHIP
+SELECT s.name AS spaceship_name, 
+       sp.name AS spaceport_name
+FROM spaceships s
+JOIN journeys j ON s.id = j.spaceship_id
+JOIN spaceports sp ON j.destination_spaceport_id = sp.id
+WHERE s.light_speed_rate = (
+    SELECT MAX(light_speed_rate) FROM spaceships
+);
+
 -- EXTRACT - PILOTS YOUNGER THAN 30 YEARS
+SELECT DISTINCT s.name, s.manufacturer
+FROM spaceships s
+WHERE s.id IN (
+    SELECT DISTINCT j.spaceship_id
+    FROM journeys j
+    JOIN travel_cards tc ON j.id = tc.journey_id
+    JOIN colonists c ON tc.colonist_id = c.id
+    WHERE c.birth_date > DATE_SUB('2019-01-01', INTERVAL 30 YEAR)
+    AND tc.job_during_journey = 'Pilot'
+)
+ORDER BY s.name ASC;
+
 -- EXTRACT ALL EDUCATIONAL MISSION
+SELECT DISTINCT p.name AS planet_name, sp.name AS spaceport_name
+FROM planets p
+JOIN spaceports sp ON p.id = sp.planet_id
+JOIN journeys j ON sp.id = j.destination_spaceport_id
+WHERE j.purpose = 'Educational'
+ORDER BY sp.name DESC;
+
 -- EXTRACT ALL PLANETS AND THEIR JOURNEY COUNT
+WITH JourneyCounts AS (
+    SELECT sp.planet_id, COUNT(j.id) AS journeys_count
+    FROM spaceports sp
+    LEFT JOIN journeys j ON sp.id = j.destination_spaceport_id
+    GROUP BY sp.planet_id
+)
+SELECT p.name AS planet_name, jc.journeys_count AS journeys_count
+FROM planets p
+JOIN JourneyCounts jc ON p.id = jc.planet_id
+WHERE jc.journeys_count > 0
+ORDER BY journeys_count DESC, planet_name ASC;
+
 -- EXTRACT THE SHORTEST JOURNEY
+SELECT j.id AS id,
+       p.name AS planet_name,
+       sp.name AS spaceport_name,
+       j.purpose AS journey_purpose
+FROM journeys j
+JOIN spaceports sp ON j.destination_spaceport_id = sp.id
+JOIN planets p ON sp.planet_id = p.id
+ORDER BY TIMESTAMPDIFF(SECOND, j.journey_start, j.journey_end) ASC
+LIMIT 1;
+
 -- EXTRACT THE LESS POPULAR JOB
+SELECT tc.job_during_journey AS job_name
+FROM journeys j
+JOIN travel_cards tc ON j.id = tc.journey_id
+WHERE j.journey_end - j.journey_start = (
+    SELECT MAX(journey_end - journey_start)
+    FROM journeys
+)
+GROUP BY tc.job_during_journey
+ORDER BY COUNT(tc.colonist_id) ASC
+LIMIT 1;
+
 -- GET COLONISTS COUNT
 -- MODIFY SPACESHIP
