@@ -74,3 +74,57 @@ WHERE position_id IN (5, 8, 11, 13);
 DELETE FROM preserves
 WHERE established_on IS NULL;
 
+-- MOST EXPERIENCED WORKERS
+SELECT CONCAT(first_name, ' ', last_name) AS full_name,
+       DATEDIFF('2024-01-01', start_date) AS days_of_experience
+FROM workers
+WHERE DATEDIFF('2024-01-01', start_date) > 1825 
+ORDER BY days_of_experience DESC
+LIMIT 10;
+
+-- WORKERS SALARY
+SELECT w.id AS worker_id,
+       w.first_name,
+       w.last_name,
+       p.name AS preserve_name,
+       c.country_code
+FROM workers w
+JOIN preserves p ON w.preserve_id = p.id
+JOIN countries_preserves cp ON p.id = cp.preserve_id
+JOIN countries c ON cp.country_id = c.id
+WHERE w.salary > 5000
+AND w.age < 50
+ORDER BY c.country_code ASC;
+
+-- ARMED WORKERS COUNT
+SELECT p.name AS name,
+       COUNT(*) AS armed_workers
+FROM workers w
+JOIN preserves p ON w.preserve_id = p.id
+WHERE w.is_armed = 1
+GROUP BY p.name
+ORDER BY armed_workers DESC, p.name ASC;
+
+-- OLDEST PRESERVES
+SELECT p.name AS name,
+       c.country_code AS country_code,
+       YEAR(p.established_on) AS founded_in
+FROM preserves p
+JOIN countries_preserves cp ON p.id = cp.preserve_id
+JOIN countries c ON cp.country_id = c.id
+WHERE MONTH(p.established_on) = 5
+ORDER BY p.established_on ASC
+LIMIT 5;
+
+-- PRESERVE CATEGORIES
+SELECT id,
+       name,
+       CASE
+           WHEN area <= 100 THEN 'very small'
+           WHEN area <= 1000 THEN 'small'
+           WHEN area <= 10000 THEN 'medium'
+           WHEN area <= 50000 THEN 'large'
+           ELSE 'very large'
+       END AS category
+FROM preserves
+ORDER BY area DESC;
