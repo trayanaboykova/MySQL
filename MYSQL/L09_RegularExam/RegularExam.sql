@@ -128,3 +128,41 @@ SELECT id,
        END AS category
 FROM preserves
 ORDER BY area DESC;
+
+-- EXTRACT AVERAGE SALARY
+DELIMITER $
+
+CREATE FUNCTION udf_average_salary_by_position_name (position_name VARCHAR(40))
+RETURNS DECIMAL(19, 2)
+BEGIN
+    DECLARE avg_salary DECIMAL(19, 2);
+    
+    SELECT AVG(w.salary) INTO avg_salary
+    FROM workers w
+    JOIN positions p ON w.position_id = p.id
+    WHERE p.name = position_name;
+    
+    RETURN avg_salary;
+END$
+
+DELIMITER ;
+
+-- IMPROVING THE STANDARD OF LIVING
+DELIMITER //
+
+CREATE PROCEDURE udp_increase_salaries_by_country (country_name VARCHAR(40))
+BEGIN
+    DECLARE country_id INT;
+    DECLARE increase_percentage DECIMAL(5, 2);
+    SELECT id INTO country_id
+    FROM countries
+    WHERE name = country_name;
+    SET increase_percentage = 1.05;
+    UPDATE workers w
+    JOIN preserves p ON w.preserve_id = p.id
+    JOIN countries_preserves cp ON p.id = cp.preserve_id
+    SET w.salary = w.salary * increase_percentage
+    WHERE cp.country_id = country_id;
+END //
+
+DELIMITER ;
