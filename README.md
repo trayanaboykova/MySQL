@@ -1,4 +1,4 @@
-# MYSQL
+# [MYSQL](https://github.com/trayanaboykova/Java-DB/tree/main/MYSQL)
 Coding exercises and projects from my education at <a href="www.softuni.bg">SoftUni</a>
 <br>
 All of the solutions have passed 100/100 - you can check them here: <a href="https://judge.softuni.org/Contests/#!/List/ByCategory/64/Java-Databases-Basics">MYSQL</a>
@@ -20,13 +20,15 @@ All of the solutions have passed 100/100 - you can check them here: <a href="htt
 
 **<ins>Database Programmability and Transactions</ins>**: In this section, I delved into the realm of database programmability and transaction management, essential for enhancing the functionality and reliability of database systems. I learned about user-defined functions, which allow for custom logic implementation within the database, improving code modularity and reusability. Additionally, I explored stored procedures, enabling the encapsulation of complex SQL logic for streamlined execution and enhanced security. Understanding transactions, I grasped the concept of atomicity, consistency, isolation, and durability (ACID), crucial for maintaining data integrity and ensuring the reliability of database operations. Furthermore, I gained insights into triggers, which automate actions based on predefined database events, enhancing data consistency and enforcing business rules. This comprehensive understanding of database programmability and transaction management equips me with the skills to develop robust and efficient database solutions capable of meeting diverse business requirements.
 
+In this MySQL course, I've learned the basics of database management with a focus on SQL queries and CRUD operations. Additionally, I explored built-in functions for data manipulation, data aggregation techniques, table relations, advanced querying with JOINs and subqueries, and database programmability with user-defined functions, stored procedures, transactions, and triggers. This comprehensive training equips me to proficiently design, manage, and optimize databases for real-world applications.
 
+# Certificate
+<a href="https://softuni.bg/certificates/details/200872/8f20f09f" rel="nofollow"><img src="https://github.com/trayanaboykova/JavaOOP/assets/101351760/607f7a4d-b064-40de-9653-53d1b9dc9c90" alt="Java OOP"></a>
 
+# [Spring Data](https://github.com/trayanaboykova/Java-DB/tree/main/MYSQL)
+Coding exercises and projects from my education at <a href="www.softuni.bg">SoftUni</a>
+<br>
+All of the solutions have passed 100/100 - you can check them here: <a href="https://judge.softuni.org/Contests/#!/List/ByCategory/72/Java-Databases-Advanced-Exams">Spring Data</a>
+<br>
 
-
-
-
-
-
-
-
+<b> Course Curriculum: Spring Data </b>
