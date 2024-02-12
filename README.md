@@ -1,7 +1,7 @@
 # [MySQL](https://github.com/trayanaboykova/Java-DB/tree/main/MYSQL)
 Coding exercises and projects from my education at <a href="www.softuni.bg">SoftUni</a>
 <br>
-All of the solutions have passed 100/100 - you can check them here: <a href="https://judge.softuni.org/Contests/#!/List/ByCategory/64/Java-Databases-Basics">MYSQL</a>
+All of the solutions have passed 100/100 - you can check them here: <a href="https://judge.softuni.org/Contests/#!/List/ByCategory/64/Java-Databases-Basics">MySQL</a>
 <br>
 
 <b> Course Curriculum: MySQL </b>
