@@ -1,10 +1,10 @@
-# [MYSQL](https://github.com/trayanaboykova/Java-DB/tree/main/MYSQL)
+# [MySQL](https://github.com/trayanaboykova/Java-DB/tree/main/MYSQL)
 Coding exercises and projects from my education at <a href="www.softuni.bg">SoftUni</a>
 <br>
 All of the solutions have passed 100/100 - you can check them here: <a href="https://judge.softuni.org/Contests/#!/List/ByCategory/64/Java-Databases-Basics">MYSQL</a>
 <br>
 
-<b> Course Curriculum: MYSQL </b>
+<b> Course Curriculum: MySQL </b>
 
 **<ins>Databases Introduction. Data Definition and Datatypes</ins>**: In this part of the lecture, I've learned the foundational concepts of databases, focusing on data definition and data types. I've delved into the usage of Structured Query Language (SQL) as a powerful tool for managing databases, mastering basic SQL queries for various data operations. Understanding the nuances of data types in MySQL Server has been pivotal, allowing me to effectively manage and organize data within database tables. Furthermore, I've explored data management techniques and the customization of tables to suit specific needs, laying a strong foundation for proficient database handling in real-world applications.
 
@@ -23,4 +23,4 @@ All of the solutions have passed 100/100 - you can check them here: <a href="htt
 In this MySQL course, I've learned the basics of database management with a focus on SQL queries and CRUD operations. Additionally, I explored built-in functions for data manipulation, data aggregation techniques, table relations, advanced querying with JOINs and subqueries, and database programmability with user-defined functions, stored procedures, transactions, and triggers. This comprehensive training equips me to proficiently design, manage, and optimize databases for real-world applications.
 
 # Certificate
-<a href="https://softuni.bg/certificates/details/202966/64952c80" rel="nofollow"><img src="https://github.com/trayanaboykova/Java-DB/assets/101351760/56b45979-ad96-432a-a998-55762ac04c5a" alt="MYSQL"></a>
+<a href="https://softuni.bg/certificates/details/202966/64952c80" rel="nofollow"><img src="https://github.com/trayanaboykova/Java-DB/assets/101351760/56b45979-ad96-432a-a998-55762ac04c5a" alt="MySQL"></a>
