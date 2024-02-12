@@ -23,12 +23,4 @@ All of the solutions have passed 100/100 - you can check them here: <a href="htt
 In this MySQL course, I've learned the basics of database management with a focus on SQL queries and CRUD operations. Additionally, I explored built-in functions for data manipulation, data aggregation techniques, table relations, advanced querying with JOINs and subqueries, and database programmability with user-defined functions, stored procedures, transactions, and triggers. This comprehensive training equips me to proficiently design, manage, and optimize databases for real-world applications.
 
 # Certificate
-<a href="https://softuni.bg/certificates/details/200872/8f20f09f" rel="nofollow"><img src="https://github.com/trayanaboykova/JavaOOP/assets/101351760/607f7a4d-b064-40de-9653-53d1b9dc9c90" alt="Java OOP"></a>
-
-# [Spring Data](https://github.com/trayanaboykova/Java-DB/tree/main/MYSQL)
-Coding exercises and projects from my education at <a href="www.softuni.bg">SoftUni</a>
-<br>
-All of the solutions have passed 100/100 - you can check them here: <a href="https://judge.softuni.org/Contests/#!/List/ByCategory/72/Java-Databases-Advanced-Exams">Spring Data</a>
-<br>
-
-<b> Course Curriculum: Spring Data </b>
+<a href="https://softuni.bg/certificates/details/202966/64952c80" rel="nofollow"><img src="https://github.com/trayanaboykova/Java-DB/assets/101351760/56b45979-ad96-432a-a998-55762ac04c5a" alt="MYSQL"></a>
