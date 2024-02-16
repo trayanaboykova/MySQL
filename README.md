@@ -1,5 +1,5 @@
 # MySQL
-Coding exercises and projects from my education at <a href="www.softuni.bg">SoftUni</a>
+Exercises from my education at <a href="www.softuni.bg">SoftUni</a>
 <br>
 All of the solutions have passed 100/100 - you can check them here: <a href="https://judge.softuni.org/Contests/#!/List/ByCategory/64/Java-Databases-Basics">MySQL</a>
 <br>
@@ -8,7 +8,7 @@ All of the solutions have passed 100/100 - you can check them here: <a href="htt
 
 **<ins>Databases Introduction. Data Definition and Datatypes</ins>**: In this part of the lecture, I've learned the foundational concepts of databases, focusing on data definition and data types. I've delved into the usage of Structured Query Language (SQL) as a powerful tool for managing databases, mastering basic SQL queries for various data operations. Understanding the nuances of data types in MySQL Server has been pivotal, allowing me to effectively manage and organize data within database tables. Furthermore, I've explored data management techniques and the customization of tables to suit specific needs, laying a strong foundation for proficient database handling in real-world applications.
 
-**<ins>Basic CRUD</ins>**: In this segment of the course, I delved into the fundamental operations of Create, Read, Update, and Delete (CRUD) in database management. I grasped the essentials of query basics, enabling me to retrieve data from databases efficiently. Additionally, I learned how to insert new data into database tables effectively and modify existing records as needed. Mastering these CRUD operations has equipped me with the essential skills to interact with databases, empowering me to manage data seamlessly in various applications. 
+**<ins>Basic CRUD</ins>**: In this segment of the course, I delved into the fundamental operations of Create, Read, Update, and Delete (CRUD) in database management. I grasped the essentials of query basics, enabling me to retrieve data from databases efficiently. Additionally, I learned how to insert new data into database tables effectively and modify existing records as needed. Mastering these CRUD operations has equipped me with the essential skills to interact with databases, empowering me to manage data seamlessly in various applications.
 
 **<ins>Built-in Functions</ins>**: In this section, I explored the built-in functions available in MySQL Server, which are essential for efficient data manipulation. I learned about various categories of functions, including string functions for text manipulation, arithmetical operators, and numeric functions for mathematical operations, date functions for managing date and time data, and wildcards for flexible pattern matching in queries. By mastering these built-in functions, I gained the ability to perform a wide range of data operations effectively, enhancing my proficiency in database management and query execution.
 
