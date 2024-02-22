@@ -24,3 +24,4 @@ In this MySQL course, I've learned the basics of database management with a focu
 
 # Certificate
 <a href="https://softuni.bg/certificates/details/202966/64952c80" rel="nofollow"><img src="https://github.com/trayanaboykova/Java-DB/assets/101351760/56b45979-ad96-432a-a998-55762ac04c5a" alt="MySQL"></a>
+
