@@ -24,4 +24,3 @@ All of the solutions have passed 100/100 - you can check them here: <a href="htt
 
 # Certificate
 <a href="https://softuni.bg/certificates/details/202966/64952c80" rel="nofollow"><img src="https://github.com/trayanaboykova/Java-DB/assets/101351760/56b45979-ad96-432a-a998-55762ac04c5a" alt="MySQL"></a>
-
