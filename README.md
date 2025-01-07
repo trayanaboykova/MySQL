@@ -4,7 +4,7 @@ Exercises from my education at <a href="https://softuni.bg/">SoftUni</a>
 All of the solutions have passed 100/100 - you can check them here: <a href="https://judge.softuni.org/Contests/#!/List/ByCategory/64/Java-Databases-Basics">MySQL</a>
 <br> 
 
-<b> Course Curriculum: MySQL </b>
+<b> Course Curriculum: [MySQL Course](https://softuni.bg/trainings/4365/mysql-january-2024) </b>
 
 **[Databases Introduction. Data Definition and Datatypes](https://github.com/trayanaboykova/MySQL/tree/main/MYSQL/Lesson01_DataDefinitionAndDatatypes)**: In this part of the lecture, I've learned the foundational concepts of databases, focusing on data definition and data types. I've delved into the usage of Structured Query Language (SQL) as a powerful tool for managing databases, mastering basic SQL queries for various data operations. Understanding the nuances of data types in MySQL Server has been pivotal, allowing me to effectively manage and organize data within database tables. Furthermore, I've explored data management techniques and the customization of tables to suit specific needs, laying a strong foundation for proficient database handling in real-world applications.
 
